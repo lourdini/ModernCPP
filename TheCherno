@@ -1,0 +1,570 @@
+#include <iostream>
+#include <string>
+
+//Additional Notes
+/*
+//Declaration
+// * declaration - tells the compiler that the function exist
+//void Log(const char* message);
+
+
+// * x86 targeting windows 32-bit
+// * x64 targeting windows 64-bit
+
+// * adding this line eliminates the need for using 'std::'
+
+//using namespace std;
+
+* separated from main cpp file
+
+void Log(const char* message)
+{
+	std::cout << message << std::endl;
+}
+
+
+//cout << "Hello World" << std::endl;
+//cin.get();
+
+//std::cout << "Hello World" << std::endl;
+//std::cin.get();
+
+
+int a = 8;
+a++;
+const char* string = "Hello";
+
+for (int i = 0; i < 5; i++)
+{
+	const char c = string[i];
+	std::cout << c << std::endl;
+}
+
+Log("Hello World");
+std::cin.get();
+*/
+
+//ENUM
+/*
+enum Example : unsigned char
+{
+	A, B, C
+};
+*/
+
+//Pointers and References
+/*
+
+#define LOG(x) std::cout << x << std::endl
+
+void Increment(int* value)
+{
+	// * must dereference first before increment. Works like PEMDAS
+	(*value)++;
+}
+
+void IncrementviaREF(int& value)
+{
+	value++;
+}
+
+//Function Pointers
+int add(int a, int b)
+{
+	return a+b;
+}
+int (*pAdd)(int,int) = add;
+int sum = (*pAdd)(5,3);
+
+//Class Pointer via Price of House
+class House
+{
+	int SquareFeet;
+	int NumBedrooms;
+	int NumBaths;
+}
+
+//tahay main ni
+House someHouse = {960,2,1};
+House * pHouse = &someHouse
+
+int GetHousePrice(House pHouse)
+{
+	return pHouse.SquareFeet * 1000 + pHouse.NumBedrooms * 10000 + pHouse.NumBaths * 5000;
+}
+int GetHousePrice(House * pHouse)
+{
+	return pHouse->SquareFeet * 1000 + pHouse->NumBedrooms * 10000 + pHouse->NumBaths * 5000;
+}
+
+int main()
+{
+	int var = 8;
+	int* ptr = &var;
+
+	// * Accessing the pointer via Read or Write
+	*ptr = 1000;
+
+	char* buffer = new char[8];
+	memset(buffer, 0, 8);
+
+	char** ptrBuffer = &buffer;
+
+	delete[] buffer;
+
+	//LOG(var);
+
+	// * References ------------------------------------
+	// * References are pointers in disguise
+
+	int a = 5;
+	int aREF = 5;
+
+	Increment(&a);
+	IncrementviaREF(aREF);
+
+	//int& ref = a;
+	//ref = 2;
+
+	//LOG(a);
+	//LOG("----");
+	//LOG(aREF);	
+}
+
+*/
+
+//Classes
+/*
+
+class Player
+{
+	// * structs default to private
+public:
+
+	int x, y;
+	int speed;
+
+	void Move(int xa, int ya)
+	{
+		x += xa * speed;
+		y += ya * speed;
+	}
+
+};
+
+/*
+* Not simplified
+void Move(Player& player, int xa, int ya)
+{
+	player.x += xa * player.speed;
+	player.y += ya * player.speed;
+}
+
+
+int main()
+{
+	Player player;
+	player.Move(5, 10);
+}
+
+*/
+
+//Static Outside
+/*
+
+// * extern - look for it outside, external linkage
+extern int s_Variable;
+
+int main()
+{
+	std::cout << s_Variable << std::endl;
+}
+
+*/
+
+//Static Inside
+/*
+
+class Entity
+{
+public:
+	static int x, y;
+
+	static void Print()
+	{
+		std::cout << x << "," << y << std::endl;
+	}
+};
+
+int Entity::x;
+int Entity::y;
+
+int main()
+{
+	//Entity
+	/*
+	Entity e;
+	e.x = 2;
+	e.y = 3;
+
+	// * no static
+	//Entity e1 = { 5,8 };
+
+	//Entity e1;
+	Entity::x = 5;
+	Entity::y = 8;
+
+	Entity::Print();
+}
+*/	
+
+//Log Class
+/*
+
+class Log
+{
+public:
+
+	enum Level
+	{
+		LevelError = 0, LevelWarning, LevelInfo
+	};
+
+private:
+	// * m_ tells private variable
+	Level m_LogLevel = LevelInfo;
+
+public:
+
+	void SetLevel(Level level)
+	{
+		m_LogLevel = level;
+	}
+
+	void Warn(const char* message)
+	{
+		if (m_LogLevel >= LevelWarning)
+			std::cout << "[WARNING]: " << message << std::endl;
+	}
+
+	void Error(const char* message)
+	{
+		if (m_LogLevel >= LevelError)
+			std::cout << "[ERROR]: " << message << std::endl;
+	}
+
+	void Info(const char* message)
+	{
+		if (m_LogLevel >= LevelInfo)
+			std::cout << "[INFO]: " << message << std::endl;
+	}
+
+};
+
+int main()
+{
+	Log log;
+	log.SetLevel(Log::LevelInfo);
+	log.Warn("Warn");
+	log.Error("Error");
+	log.Info("Info");	
+}
+
+*/
+
+//Constructor and Deconstructor
+/*
+
+class ConstructorEntity
+{
+public:
+	float x, y;
+
+	ConstructorEntity()
+	{
+		std::cout << "Created Entity" << std::endl;
+		x = 0.0f;
+		y = 0.0f;
+	}
+
+	ConstructorEntity(float x, float  y)
+	{
+		this->x = x;
+		this->y = y;
+	}
+
+	//Destructor
+	~ConstructorEntity()
+	{
+		std::cout << "Destroyed Entity" << std::endl;
+	}
+
+	void Print()
+	{
+		std::cout << x << "," << y << std::endl;
+	}
+};
+
+void Function()
+{
+	//DestructorEntity
+	ConstructorEntity e;
+	e.Print();
+}
+
+int main()
+{
+	//ConstructorEntity
+	//ConstructorEntity e(10.0f,5.0f);
+
+	//Destructor
+	//Function();
+}	
+
+*/
+
+//Inheritance
+/*
+
+class InheritanceEntity
+{
+public:
+	float x, y;
+
+	void Move(float xa, float ya)
+	{
+		x += xa;
+		y += ya;
+	}
+
+};
+
+class InheritancePlayer : public InheritanceEntity
+{
+public:
+	const char* Name;
+
+	void PrintName()
+	{
+		std::cout << Name << std::endl;
+	}
+};
+
+int main()
+{
+	/*
+	Player player;
+	player.Move(5, 5);
+	player.x = 2;
+	
+}
+
+*/
+
+//Visibility - private,protected,public
+/*
+class Entity
+{
+private:
+	int x, y;
+
+	void Print() {}
+
+protected:
+	int j, k;
+
+	void Print() {}
+
+public:
+	Entity()
+	{
+		x = 0;
+		Print();
+	}
+};
+
+class Player : public Entity
+{
+
+};
+
+int main()
+{
+
+	Entity e;
+
+	//cannot call because private
+	//e.x = 2;
+	//e.Print();
+
+
+	std::cin.get();
+}
+*/
+
+//Arrays
+/*
+#include <array>
+
+class Entity
+{
+public:
+	
+	std::array<int, 5> another;
+
+	Entity()
+	{
+		for (int i = 0; i < another; i++)
+			example[i] = 2;
+
+		int a[5];
+		int count = sizeof(a) / sizeof(int); // 5
+
+	}
+
+};
+
+int main() 
+{
+	int example[5];
+	example[0] = 1;
+	example[1] = 2;
+	example[2] = 3;
+	example[3] = 4;
+	example[4] = 5;
+
+	//int* ptr = example;
+	//*(ptr + 2) = 6
+	//(int*)((char*)ptr + 8) = 6;
+
+	std::cout << example[0] << std::endl;
+	std::cout << example[4] << std::endl;
+
+	std::cin.get();
+}
+*/
+
+//Strings
+/*
+
+void PrintStrinf(const std::string& string)
+{
+	std::cout << string << std::endl;
+}
+
+int main()
+{
+	
+	//const char* name = "Tony";
+	//char name[] = "Tony";
+	//name[2] = 'a';
+
+	//std::cout << name << std::endl;
+	
+	std::string name = "Tony";
+
+	std::string name1 = "Lourd";
+	name1 += " Virtudazo";
+
+	std::string name2 = std::string("Lourd") + " Anthony";
+	bool contains = name2.find("ourd") != std::string::npos;
+
+	std::cout << name << std::endl;
+	std::cout << name1 << std::endl;
+	std::cout << name2 << std::endl;
+
+	std::cin.get();
+}
+*/
+
+//String Literal
+/*
+int main()
+{
+	using namespace std::string_literals;
+	std::string name0 = "Lourd"s + " Virtudazo";
+
+	const char* name = "Tony";
+	//name[1] = 'a';
+	const wchar_t* name2 = L"Tony";
+
+	const char* example = R"(Line1
+Line2
+Line3
+Line4)";
+
+	// 2byte
+	const char16_t* name3 = u"Tony";
+	// 4byte
+	const char32_t* name4 = U"Tony";
+
+	std::cout << name0 << std::endl;
+	std::cout << name << std::endl;
+	std::cout << example << std::endl;
+
+	std::cin.get();
+}
+*/
+
+//Const
+/*
+class Entity
+{
+private:
+	int m_X, m_Y;
+public:
+	int GetX() const
+	{
+		return m_X;
+	}
+	int SetX(int x) const
+	{
+		m_X = x;
+	}
+}
+
+int main()
+{
+	const int MAX = 5;
+
+	a = 2;
+
+	std::cin.get();
+}
+*/
+
+/*
+int main()
+{
+	const char* name = "Lourd";
+	std::cout << name << std::endl;
+	std::cout << *name << std::endl;
+	std::cout << *(name+1) << std::endl;
+	std::cout << &name << std::endl;
+
+	std::cin.get();
+}
+*/
+
+//Casting
+int main()
+{
+	//Implicit Casting
+	double value = 5.25;
+	int a = value;
+
+	//Explicit Casting - C style cast
+	double b = (int)value + 5.3;
+
+	//Explicit Casting - C++ style cast
+	double s = static_cast<int>(value) + 5.3;
+
+	std::cout << a << std::endl;
+	std::cout << b << std::endl; 
+	std::cout << s << std::endl;
+
+	std::cin.get();
+}
+
+
+//std::cin.get();
