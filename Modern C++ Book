@@ -1,0 +1,1976 @@
+#include <iostream>
+#include <string>
+#include <typeinfo>
+
+//Notes
+/*
+int notes() 
+{
+	// this is a comment
+	//-----------------------------------------------------
+	std::cout << "Hello World\n";
+	std::cout << "Hello," << "\n" << "Anthony" << std::endl;
+	//-----------------------------------------------------
+	//We can also use braces{} for initialization:
+
+	//bool a = true;
+	//bool b{ true };
+	//-----------------------------------------------------
+	//sizeof() Function
+
+	std::cout << "The size of type char is: " << sizeof(char) << " byte(s)" << std::endl;
+
+	char c = 'a';    
+	// is the same as:    
+	char c1 = 97;
+
+	std::cout << c1 << std::endl;
+	//-----------------------------------------------------
+	// Declaration
+
+	char mychar;    
+	int myint;    
+	double mydouble;
+	//-----------------------------------------------------
+	// Definition
+
+	char mychar = 'a';    
+	int myint = 123;    
+	double mydouble = 456.78;
+	//-----------------------------------------------------
+	//Pre - increment
+
+	int x = 5;
+	int y = ++x;  // x is incremented to 6, and then the value is assigned to y
+	// Now, x = 6, y = 6
+	//-----------------------------------------------------
+	//Post-increment
+
+	int x = 5;
+	int y = x++;  // The current value of x (5) is assigned to y, and then x is incremented to 6
+	// Now, x = 6, y = 5
+	//-----------------------------------------------------
+	//User-Input
+
+	std::cout << "Please enter a number and press enter: ";
+	int x = 0;
+	std::cin >> x;
+	std::cout << "You entered: " << x;
+	//-----------------------------------------------------
+	//Separated User-Input
+
+	int x = 0;    
+	int y = 0;    
+	std::cin >> x >> y;    
+	std::cout << "You entered: " << x << " and " << y;
+	//-----------------------------------------------------
+	//Separated User-Input Different types
+
+	std::cout << "Please enter a character, an integer, and a double: ";    
+	char c = 0;    
+	int x = 0;    
+	double d = 0.0;    
+	std::cin >> c >> x >> d;
+	//-----------------------------------------------------
+	//To initialize a pointer that does not point to any object, we can use the nullptr literal
+
+	char* p = nullptr;
+	//-----------------------------------------------------
+	//String
+
+	std::string name0 = "Lourd" ;
+	std::string name{ "Lourd" };
+	name += " Virtudazo";
+
+	std::string s1 = "Hello ";    
+	std::string s2 = "World.";    
+	std::string s3 = s1 + s2;
+
+	std::string s = "Hello World.";    
+	char c1 = s[0];        // 'H'    
+	char c2 = s.at(0);     // 'H';    
+	char c3 = s[6];        // 'W'    
+	char c4 = s.at(6);     // 'W';
+
+	std::cout << name;
+	//-----------------------------------------------------
+	//Comparing String
+
+	std::string s1 = "Hello";    
+	if (s1 == "Hello")    {}
+
+	std::string s1 = "Hello";    
+	std::string s2 = "World.";    
+	if (s1 == s2) {}
+	//-----------------------------------------------------
+	//String Input
+
+	std::string s;    
+	std::cout << "Please enter a string: ";    
+
+	//std::getline(read_from, into);
+	std::getline(std::cin, s);    
+	std::cout << "You entered: " << s;
+	//-----------------------------------------------------
+	//A Pointer to a String
+
+	std::string s = "Hello World.";    
+	std::cout << s.c_str();
+
+	//Output:Hello World.
+	//-----------------------------------------------------
+	//Substrings
+
+	//.substring(starting_position, length)
+
+	std::string s = "Hello World.";    
+	std::string mysubstring = s.substr(6, 5);    
+	std::cout << "The substring value is: " << mysubstring;
+
+	//Output:The substring value is: World
+	//-----------------------------------------------------
+	//Finding a Substring
+
+	std::string s = "This is a Hello World string.";    
+	std::string stringtofind = "Hello";    
+	std::string::size_type found = s.find(stringtofind);    
+	if (found != std::string::npos)    
+	{        
+		std::cout << "Substring found at position: " << found;    
+	}else    
+	{        
+		std::cout << "The substring is not found.";
+	}
+	//-----------------------------------------------------
+	//Automatic Type Deduction
+
+	auto c = 'a';    // char type
+	auto x = 123;    // int type
+	auto d = 123.456 / 789.10;    // double
+
+	int x = 123; // auto& y = (must be lvalue)  
+	auto& y = x; // y is of int& type
+
+	const auto x = 123; // x is of const int type
+	//-----------------------------------------------------
+	//The decltype specifier allows you to inquire and use the type of an expression.
+
+	int a = 42;
+	decltype(a) b = a;   // b has the same type as a (int)
+	//-----------------------------------------------------
+	//Determine data type base on initializer
+
+	auto x = 10.90;
+
+	// Using typeid to get type information
+	const std::type_info& typeInfo = typeid(x);
+
+	// Printing the type name
+	std::cout << "Type: " << typeInfo.name() << std::endl;
+
+	return 0;
+	//-----------------------------------------------------
+	//Another syntax for If-else
+
+	bool mycondition = true;    
+	int x = 0;    
+	x = (mycondition) ? 1 : 0;    
+	std::cout << "The value of x is: " << x << '\n';
+
+	//(condition) ? expression_1 : expression_2
+	//-----------------------------------------------------
+	//Switch Statement
+
+	switch (condition)
+	{
+	case value1:    
+		statement(s);    
+		break;
+	case value2etc:    
+		statement(s);    
+		break;
+	default:    
+		statement(s);    
+		break;
+	}
+	//-----------------------------------------------------
+	//The constexpr specifier indicates that the value of the variable should be computable at compile time.
+
+	constexpr int n = 123;          //OK, 123 is a compile-time constant // expression    
+	constexpr double d = 456.78;    //OK, 456.78 is a compile-time constant // expression    
+	constexpr double d2 = d;        //OK, d is a constant expression    
+	int x = 123;    
+	constexpr int n2 = x;           //compile-time error                                    
+									// the value of x is not known during // compile-time
+
+	//This means you typically use literal values of other constexpr variables, 
+	//or functions marked as constexpr for initialization.
+
+	//-----------------------------------------------------
+	//Const calling within const functions
+
+	class MyClass {
+	public:
+		void nonConstFunction() {
+			std::cout << "Non-const function called." << std::endl;
+		}
+
+		void constFunction() const {
+			std::cout << "Const function called." << std::endl;
+		}
+	};
+
+	const MyClass obj1; // const object
+	obj1.constFunction();  // Can call const function on a const object
+	// obj1.nonConstFunction();  // Error: Cannot call non-const function on a const object
+
+	MyClass obj2; // non-const object
+	obj2.constFunction();  // Can call const function on a non-const object
+	obj2.nonConstFunction();  // Can call non-const function on a non-const object
+	//-----------------------------------------------------
+	//Function Declaration and Definition
+
+	// function declaration
+	void myfunction(); 
+
+	// function definition
+	void myfunction() 
+	{    
+		std::cout << "Hello World from a function.";
+	}
+	//-----------------------------------------------------
+	//Block Scope
+
+	int x = 123;
+	std::cout << x << "\n";
+	{
+		int x = 456;
+		std::cout << x << "\n";
+	}
+	std::cout << x << "\n";
+
+	Output: 123 456 123
+	//-----------------------------------------------------
+	//Heap memory | 'new' keyword
+
+	int main()
+	{    
+		int* p = new int;    
+		*p = 123;    
+		std::cout << "The pointed-to value is: " << *p;    
+		delete p;
+	}
+	//Output:The pointed-to value is: 123
+	//-----------------------------------------------------
+	//Access array using Pointers[]
+	when you write p[0] = 1;, it is equivalent to *p = 1;, and when you write p[1] = 2;, it is equivalent to *(p + 1) = 2;
+	int* p = new int[3];
+	p[0] = 1;
+	p[1] = 2;
+	p[2] = 3;
+	std::cout << "The values are: " << p[0] << ' ' << p[1] << ' ' << p[2];
+	delete[] p;
+	//Output:The values are: 1 2 3
+	//-----------------------------------------------------
+	//Classes - declare, define, instance
+
+	//To only declare a class name, we write
+	class MyClass;
+	//To define an empty class, we add a class body marked by braces {}:
+	class MyClass{};
+	//To create an instance of the class, an object, we use:
+	class MyClass{};
+	int main()
+	{   
+		MyClass o;
+	}
+	//-----------------------------------------------------
+	//Data Member Fields | Member Functions
+
+	class MyClass
+	{    
+		//Data Member Fields | Data Field | Member Variables
+		char c;   
+		int x;   
+		double d;
+
+		//Member Functions
+		void dosomething()    
+		{        
+			std::cout << "Hello World from a class.";     
+		}
+
+		//Declare outside function
+		void dosomethingOutside();
+	};
+
+	//Member Functions outside the class
+	void Myclass::dosomethingOutside()
+	{    
+		std::cout << "Hello World from a class.";
+	}
+	//-----------------------------------------------------
+	//Access Specifiers - public,protected,private | private by default
+
+	class MyClass
+	{
+	public:
+		// everything in here    
+		// has public access level
+	protected:    
+		// everything in here    
+		// has protected access level
+	private:    
+		// everything in here    
+		// has private access level};
+	//-----------------------------------------------------
+	//A Member function can access and manipulate both public and private members of the same class.
+
+	class MyClass {
+	private:
+		int x;  // Private member variable
+
+	public:
+		void setX(int value) {
+			x = value;  // Accessing the private member variable x
+		}
+
+		void printX() {
+			std::cout << "Value of x: " << x << std::endl;  // Accessing the private member variable x
+		}
+	};
+
+	int main() {
+		MyClass obj;
+		obj.setX(42);   // Calling the public member function setX() to set the private member x
+		obj.printX();   // Calling the public member function printX() to print the private member x
+		return 0;
+	}
+	//-----------------------------------------------------
+
+
+	std::cin.get();
+}
+*/
+
+//Chapter 15 - Exercises
+/*
+	//-----------------------------------------------------
+	//Array Definition
+
+	double arr[5] = { 10.1, 20.2, 30.3, 40.4, 50.5 };
+	arr[0] = 10.2;
+	arr[4] = 50.6;
+
+	std::cout << arr[0] << " " << arr[4] << std::endl;
+	//-----------------------------------------------------
+	//Pointer to an Object
+
+	double num = 5.5;
+	double* numptr = &num;
+
+	std::cout << *numptr << std::endl;
+	//-----------------------------------------------------
+	//Reference Type
+
+	double mydouble = 5.5;
+	double& myreference = mydouble;
+
+	myreference = 6.5;
+
+	std::cout << mydouble << " " << myreference << std::endl;
+	//-----------------------------------------------------
+	//Strings
+
+	std::string name = "Lourd";
+	std::string surname = "Virtudazo";
+
+	std::string fullname = name +" "+ surname;
+	std::cout << fullname << std::endl;
+	//-----------------------------------------------------
+	//Strings from Standard Input
+
+	std::cout << "enter firstname: " << std::endl;
+	std::getline(std::cin, name);
+
+	std::cout << "enter surname: " << std::endl;
+	std::getline(std::cin, surname);
+
+	fullname = name + " " + surname;
+	std::cout << fullname << std::endl;
+	//-----------------------------------------------------
+	//Creating a Substring
+
+	std::string nameD = "John Doe";
+	std::string myName = nameD.substr(0, 4);
+	std::string mySurname = nameD.substr(5, 3);
+	std::cout << myName + " " + mySurname << std::endl;
+	//-----------------------------------------------------
+	//Finding a Single Character and Word
+
+	std::string s = "Hello C++ World";
+	std::string stringtofind = "C";
+	std::string stringtofind2 = "C++";
+	std::string::size_type found = s.find(stringtofind);
+	if (found != std::string::npos)
+	{
+		std::cout << "Substring found at position: " << found << std::endl;
+	}
+	else
+	{
+		std::cout << "The substring is not found." << std::endl;
+	}
+	//-----------------------------------------------------
+	//Automatic Type Deduction
+
+	auto x = 'a';
+	auto y = 12;
+	auto z = 12.05;
+
+	std::cout << x << y << z << std::endl;
+*/
+
+//Chapter 20 - Exercises
+/*
+//Topics Covered
+	//Function Definition
+	//Separate Declaration and Definition
+	//Function Parameters
+	//Passing Arguments
+	//Function Overloads
+
+void printmessage();
+int multiplication(int x, int y);
+void custommessage(const std::string& message);
+int division(int, int);
+double division(double, double);
+
+int main() 
+{
+	printmessage();
+	
+	int result = multiplication(5, 10);
+
+	std::cout << result << "\n";
+
+	std::string mymessage = "Custom Message";
+	custommessage(mymessage);
+
+	int resultIntDiv = division(10, 2);
+	double resultDoubleDiv = division(10.6, 2.0);
+
+	std::cout << resultIntDiv <<" "<< resultDoubleDiv << "\n";
+
+}
+
+int multiplication(int x,int y)
+{
+	return x * y;
+}
+
+void printmessage()
+{
+	std::cout << "Hello World from a function" << "\n";
+}
+
+void custommessage(const std::string& message) {
+	std::cout << message << "\n";
+}
+
+int division(int x, int y) {
+	return x / y;
+}
+
+double division(double x, double y) {
+	return x / y;
+}
+*/
+
+//Chapter 22 - Exercises
+/*
+	//-----------------------------------------------------
+	//Automatic Storage Duration - Stack
+
+	int x = 2;
+	int y = 3;
+	//-----------------------------------------------------
+	//Dynamic Storage Duration - Heap
+
+	//int* p = new int{123};
+	int* p = new int;
+	*p = 123;
+	std::cout << "The pointed-to value is: " << *p << "\n";
+	delete p;
+	//-----------------------------------------------------
+	//Automatic and Dynamic Storage Durations
+
+	int j = 10;
+	int* k = new int{ j };
+	std::cout << j << " " << *k << "\n";
+*/
+
+//Classes - Lecture
+/*
+class MyClass
+{
+private:
+	int j;
+	int* p;
+	
+
+public:
+	std::string s;
+	int x, y;
+	//-----------------------------------------------------
+	//Default Constructor
+	MyClass() { std::cout << "Default constructor invoked." << '\n'; }
+	//-----------------------------------------------------
+	//When an object is created, a code inside the constructor runs.
+	// MyClass()
+	// {
+	//	 std::cout << "Default Constructor Initiated" << "\n";
+	// }
+
+	//another example
+	// MyClass(int x = 123, int y = 456)
+	// {
+	// 	 std::cout << "Default Constructor Initiated" << "\n";
+	// }
+	
+	//-----------------------------------------------------
+	//Alternate Syntax
+	MyClass(int xx, int yy)
+		//more efficient way to initialize an object of a class is to use the constructor’s
+		//member initializer list 
+		//:x{ xx }, y{ yy } {}
+	{
+		std::cout << "Initialize Constructor Initiated" << "\n";
+		x = xx;
+		y = yy;
+	}
+
+	//For move assignment example
+	MyClass(int xx, std::string ss) : x{ xx }, s{ ss }
+	{}
+
+	//-----------------------------------------------------
+	//User defined copy constructor
+	//when we initialize an object of the class with another object of the same class, 
+	//we invoke a copy constructor.
+	MyClass(const MyClass& rhs)
+	//	: x{ rhs.x +2}, y{ rhs.y } // initialize members with other object's // members    
+	{        
+		x = rhs.x;
+		y = rhs.y;
+
+		std::cout << "Copy constructor invoked." << "\n";
+	}
+	//-----------------------------------------------------
+	//Deep Copy - copying pointers and arrays properly
+
+	//MyClass(int xx, int pp) 
+		//: x{ xx }, p{ new int{pp} }
+	//{
+	//	x = xx;
+	//	p = new int{ pp };
+	//}
+
+	//MyClass(const MyClass& rhs) 
+		//: x{ rhs.x }, p{ new int {*rhs.p} }
+	//{
+	//	x = rhs.x;
+	//	p = new int{ *rhs.p };
+	//	std::cout << "User-defined copy constructor invoked." << "\n";
+	//}
+
+	//Copy Assignment
+	MyClass& operator=(const MyClass& rhs)
+	{
+		x = rhs.x;
+		y = rhs.y;
+		std::cout << "Copy assignment invoked." << "\n";
+		return *this;
+	}
+
+	//Move Constructor
+	MyClass(MyClass&& rhs)
+		:x{ std::move(rhs.x) },y{std::move(rhs.y)}, s{std::move(rhs.s)}
+	{
+		std::cout << "Move constructor invoked." << "\n";
+	}
+
+	//Move Assignment
+	MyClass& operator=(MyClass&& otherobject)
+	{
+		x = std::move(otherobject.x);        
+		s = std::move(otherobject.s);
+		std::cout << "Move assignment invoked." << "\n";
+		return *this;
+	}
+	 
+};
+
+int main()
+{
+	int num1 = 3;
+	int num2 = 4;
+
+	MyClass o0{ num1,num2 };
+
+	//Copy Constructor
+	MyClass o{num1,num2};
+	MyClass o1 = o; // default copy constructor invoked if(!userdefined copy constructor)
+
+	//Copy Assignment
+	MyClass o3;
+	o3 = o;
+
+	//Move Constructor 
+	MyClass o4 = std::move(o0);
+
+	MyClass o5{ 123, "This is currently in object 1." };
+	MyClass o6{ 456, "This is currently in object 2." };    
+	o6 = std::move(o5);
+	
+	std::cout << o.x << " " << o.y << "\n";
+	std::cout << o1.x << " " << o1.y << "\n";
+	std::cout << o3.x << " " << o3.y << "\n";
+	std::cout << o4.x << " " << o4.y << "\n";
+	std::cout << o6.x << " " << o6.s << "\n";
+
+}
+
+//Deep Copy vs. Shallow Copy:
+//A deep copy involves creating new memory for dynamic data and copying the content, 
+//ensuring that the original and the copy are independent.
+
+//A shallow copy copies the values of members directly, including any pointers. 
+//Both the original and the copy then point to the same dynamically allocated memory.
+*/
+
+//Constructor types - Lecture
+/*
+// MyClass&: This is the return type. It says that the function returns a reference to an object of type MyClass.
+// 
+// In C++, 'this' is a pointer to the current object. When you use *this, you are dereferencing the pointer, 
+// which means you are accessing the actual object to which the pointer points. 
+//
+//The (int) parameter is a dummy parameter used to distinguish between 
+// the postfix and prefix versions of the operator.
+class MyClass
+{
+private:
+	int x;
+	double d;
+
+public:
+	MyClass() :x{ 0 }, d{ 0.0 }
+	{
+	}
+
+	MyClass(int xx, double dd) : x{ xx }, d{ dd }
+	{
+	}
+
+	// Prefix operator++
+	MyClass& operator++()
+	{
+		++x;
+		++d;
+		std::cout << "Prefix operator ++ invoked." << '\n';        
+		return *this;
+	}
+	
+	//-----------------------------------------------------
+	// Postfix operator++
+	 
+	MyClass operator++(int)
+	{
+		MyClass tmp(*this);	//create a copy
+		operator++();		//invoke the prefix operator overload
+		std::cout << "Postfix operator ++ invoked." << '\n';
+		return tmp;			//return old value
+	}
+
+	// Postfix operator++ without returning oldVal
+	//void operator++(int) 
+	//{
+	//	std::cout << "Postfix operator ++ invoked without returning oldVal." << '\n';
+	//	++x;  // Increment the current object
+	//	++d;
+	//}
+	//-----------------------------------------------------
+	// Postfix operator++ - from ChatGPT
+	
+	//MyClass operator++(int) {
+	//	MyClass temp = *this;  // Create a temporary copy
+	//	++(*this);            // Call the prefix operator
+	//	return temp;          // Return the temporary copy
+	//}
+	// without using 'this' keyword
+	//MyClass operator++(int) {
+	//	MyClass temp(*this); // Create a temporary copy
+	//	operator++();        // Call the prefix operator
+	//	return temp;         // Return the temporary copy
+	//}
+
+	// Increment by function
+	MyClass& increment()
+	{
+		++x;
+		++d;
+		std::cout << "Regular Increment ++ invoked." << '\n';
+		return *this;
+	}
+
+	// Increment both int and double and return as a pair - from ChatGPT
+	std::pair<int, double> incrementPair() {
+		++x;
+		d += 0.1;
+		return { x, d };
+	}
+
+	// Overloading arithmetic operator +=
+	MyClass& operator+=(const MyClass& rhs) 
+	{ 
+		this->x += rhs.x;        
+		this->d += rhs.d;        
+		return *this; 
+	}
+
+	void operator~() const
+	{
+		std::cout << "brainfucked" << "\n";
+	}
+
+	//In C++, the friend keyword is used to grant a function or another class 
+	//access to the private and protected members of a class without the objects.
+
+	//Friend functions helps us avoid the case where the function must be a member
+	//of both of the classes to access them.
+	
+	friend MyClass operator+(MyClass lhs, const MyClass& rhs);
+
+	int incrementX()
+	{
+		return x += 100;
+	}
+
+	int getX() 
+	{
+		return x;
+	}
+
+	double getD()
+	{
+		return d;
+	}
+};
+
+MyClass operator+(MyClass lhs, const MyClass& rhs)
+{
+	lhs += rhs;
+	return lhs;
+}
+
+int main()
+{
+	MyClass myobject;
+
+	//prefix operator
+	++myobject;
+	//the same as:
+	myobject.operator++();
+	//the same as:
+	myobject.increment();
+
+	//get oldVal     postfix operator
+	MyClass oldObj = myobject++;
+
+	std::cout << myobject.getX() << " " << myobject.getD() << "\n";
+
+	//via Function
+	std::cout << "Increment via Function incrementX(): " << myobject.incrementX() << "\n";
+
+	//via Pair - from ChatGPT
+	auto result = myobject.incrementPair();
+	std::cout << "Increment via Function incrementPair(): " << result.first << " " << result.second << "\n";
+
+	MyClass myobject2{ 1,1.0 };
+	MyClass myobject3{ 2,2.1 };
+	myobject2 += myobject3;
+	std::cout << "Overload binary operator +=: " << myobject2.getX() << " " << myobject2.getD() << "\n";
+	std::cout << "OldVal from Postfix Operator: " << oldObj.getX() << " " << oldObj.getD() << "\n";
+
+	MyClass myresult = myobject2 + myobject3;
+	std::cout << "lhs += rhs: " << myresult.getX() << " " << myresult.getD() << "\n";
+
+
+	~myobject;
+
+
+}
+*/
+
+//Destructor - Lecture
+/*
+class MyClass {
+public:
+	MyClass() {}    // constructor   
+	~MyClass() { std::cout << "Destructor invoked"; }   // destructor
+};
+
+class MyClass2 
+{ 
+private:    
+	int* p; 
+public:    
+	MyClass2() 
+		: p{ new int{123} } 
+	{ 
+		std::cout << "Created a pointer in the constructor." << '\n'; 
+	}    
+	~MyClass2() 
+	{ 
+		delete p;        
+		std::cout << "Deleted a pointer in the destructor." << '\n'; 
+	} 
+	int* getP()
+	{
+		return p;
+	}
+};
+
+int main()
+{
+	MyClass o;
+	MyClass2 o2;
+
+	std::cout << o2.getP() << "\n";
+	std::cout << *(o2.getP()) << "\n";
+} // destructor invoked here when o gets out of scope
+*/
+
+//Chapter 24 - Exercises
+/*
+//MyClass&& : This indicates an rvalue reference to an object of type MyClass.
+//An rvalue reference is used to bind to temporary objects(rvalues).
+//In the context of move semantics, it is commonly used to represent the "moved-from" state.
+class MyClass
+{
+private:
+	int x;
+	double y;
+public:
+	MyClass();
+	MyClass(int xx, double yy);
+	~MyClass();
+
+	MyClass(const MyClass& rhs)
+	{
+		x = rhs.x;
+		y = rhs.y;
+		std::cout << "Copy Constructor Initialize" << "\n";
+	}
+
+	MyClass(MyClass&& otherobject)
+		:x{std::move(otherobject.x)}, y{ std::move(otherobject.y) }
+	{
+		//otherobject.x = 0;
+		//otherobject.y = 0;
+		std::cout << "Move Constructor Initialize" << "\n";
+	}
+
+	MyClass& operator-=(const MyClass& rhs)
+	{
+		this->x -= x;
+		this->y -= y;
+		std::cout << "Prefix operator -= invoked." << '\n';
+		return *this;
+	}
+
+	//rhs is passed by const reference, which means it cannot be modified inside the function.
+	//'operator-' can be a non - member function to help different classes share and subtract things, 
+	//just like a helpful friend who doesn't live in any particular house but can assist everyone.
+	friend MyClass operator-(MyClass lhs, const MyClass& rhs)
+	{
+		lhs -= rhs;
+		std::cout << "friend operator- invoked." << '\n';
+		return lhs;
+	}
+
+	void printmessage();
+	void printdata();
+
+	int getX()
+	{
+		return x;
+	}
+
+	void setX(int x)
+	{
+		this->x = x;
+	}
+};
+
+MyClass::MyClass()
+{
+	std::cout << "Constructor Invoked" << "\n";
+}
+
+MyClass::MyClass(int xx, double yy) : x{ xx }, y{ yy }
+{
+	std::cout << "Constructor Invoked" << "\n";
+}
+
+MyClass::~MyClass()
+{
+	std::cout << "Destructor Invoked" << "\n";
+}
+
+void MyClass::printdata()
+{
+	std::cout << this->x <<" "<< this->y << "\n";
+}
+
+void MyClass::printmessage()
+{
+	std::cout << "Hello World" << "\n";
+}
+
+int main()
+{
+	MyClass obj1;
+	MyClass obj2{ 2,2.1 };
+	MyClass obj21{ 2,2.1 };
+	MyClass obj3 = obj2;
+	obj2.setX(3);
+
+	obj1.printmessage();
+	obj1.setX(2);
+
+	MyClass obj4(std::move(obj21));
+	obj4 -= obj2;
+	
+	//since obj4 is an rvalue (due to std::move), the move constructor is invoked 
+	//again to create myresult.
+	MyClass myresult = obj4 - obj2;
+
+	std::cout << obj1.getX() << "\n";
+	//obj2.printdata();
+	obj3.printdata();
+	obj4.printdata();
+	myresult.printdata();
+
+
+}
+*/
+
+//Friend function examples | Forward Declaration - Youtube
+/*
+//-----------------------------------------------------
+class Salary
+{
+private:
+	int sal;
+	
+	friend int increment(Salary s);
+};
+
+int increment(Salary s)
+{
+	s.sal += 7000;
+	return s.sal;
+}
+//-----------------------------------------------------
+class Num1
+{
+private:
+	int n1;
+
+	friend class Num2;
+public:
+	Num1()
+	{
+		n1 = 11;
+	}
+};
+
+class Num2
+{
+private:
+	int n2;
+public:
+	Num2()
+	{
+		n2 = 65;
+	}
+
+	int avg()
+	{
+		Num1 obj1;
+		return (obj1.n1 + n2) / 2;
+	}
+
+};
+//-----------------------------------------------------
+//A forward declaration in C++ is a declaration of a class, function, 
+//or variable that tells the compiler that the named entity exists 
+//but doesn't provide the complete details about it.
+class B;
+class A
+{
+	int x;
+public:
+	void setX(int x)
+	{
+		this->x = x;
+	}
+	//The compiler reads the code from top to bottom so when it arrives here it
+	//still doesn't know what 'B' is so that's why it's being declared forward.
+	friend void product(A, B);
+};
+class B
+{
+	int y;
+public:
+	void setY(int y)
+	{
+		this->y = y;
+	}
+	friend void product(A, B);
+};
+
+void product(A a, B b)
+{
+	std::cout << a.x * b.y << "\n";
+}
+
+int main()
+{
+	//-----------------------------------------------------
+	Salary g{};
+	std::cout << "Salary: " << increment(g) << "\n";
+	//-----------------------------------------------------
+	Num2 obj2;
+	std::cout << obj2.avg() << "\n";
+	//-----------------------------------------------------
+	A a;
+	B b;
+	a.setX(45);
+	b.setY(20);
+	product(a, b);
+}
+*/
+
+//Classes - Inheritance - Lecture
+/*
+//The derived class and objects of a derived class can access public members of a base class
+
+//The derived class itself can access protected members of a base class. 
+//The protected access specifier allows access to the base class and derived class but not to objects
+
+//The derived class cannot access private members of a base class
+
+//-> (4) The derived class inherits public and protected base class members 
+//and can introduce its own new members
+
+class MyBaseClass 
+{
+public:
+	char c;
+	int x;
+protected:
+	char j;
+	int i;
+private:
+	char o;
+	int p = 8;
+
+public:
+	int getP() const
+	{
+		return p;
+	}
+}; 
+
+//MyDerivedClass inherits the MyBaseClass
+
+class MyDerivedClass : public MyBaseClass 
+{
+	// c and x also accessible here
+	// j and i also accessible here
+	// o and p NOT accessible here
+
+public:
+
+	//-> (4)
+	double d;
+	bool b;
+
+	void setdisplayI(int i)
+	{
+		this->i = i;
+		std::cout << this->i << "\n";
+	}
+
+	void displayP()
+	{
+		std::cout << MyBaseClass::getP() << "\n";
+	}
+}; 
+
+int main() 
+{
+	MyDerivedClass o;    
+	o.c = 'a';    
+	o.x = 123;
+
+	//Error, not accessible to an object
+	//o.j = 'a'; 
+	//o.i = 123; 
+	//o.o;
+	//o.p;
+
+	o.setdisplayI(5);
+
+	//-> (4)
+	o.d = 123.123;
+	o.b = true;
+
+	o.displayP();
+}
+*/
+
+//Scope Resolution Operator
+/*
+//The :: is called the scope resolution operator. 
+//It is used to qualify names based on their scope or namespace.
+//-----------------------------------------------------
+//When used with namespaces, it specifies the scope of a 
+//particular identifier.For example :
+namespace MyNamespace {
+	int x;
+}
+
+int main() {
+	MyNamespace::x = 10; // Accessing the variable 'x' in the namespace 'MyNamespace'
+	return 0;
+}
+//-----------------------------------------------------
+//Inside a class or structure, the scope resolution operator is 
+//used to access members of the class or structure. For example:
+class MyClass {
+public:
+	int memberVar;
+	void memberFunction() {
+		// Accessing memberVar within memberFunction
+		memberVar = 42;
+	}
+};
+
+int main() {
+	MyClass obj;
+	obj.memberFunction();
+	return 0;
+}
+
+int x = 5; // Global variable
+//-----------------------------------------------------
+//It can also be used to access global variables or functions
+//when there is a local variable with the same name:
+int main() {
+	int x = 10; // Local variable
+	std::cout << x << std::endl;       // Access local 'x'
+	std::cout << ::x << std::endl;     // Access global 'x' using scope resolution operator
+	return 0;
+}
+*/
+
+//Recursion - CS50
+/*
+void drawRecursion(int h);
+void drawIteration(int h);
+
+int main()
+{
+	int height = 5;
+
+	std::cout << "Enter Height: ";
+	std::cout << height << "\n";
+
+	//std::cin >> height;
+
+	drawIteration(height);
+	drawRecursion(height);
+
+}
+
+void drawRecursion(int h)
+{
+	if (h == 0) return;
+
+	drawRecursion(h - 1);
+	for (int i = 0; i < h; i++)
+	{
+		std::cout << "#";
+	}
+	std::cout << "\n";
+}
+
+void drawIteration(int h)
+{
+	for (int i = 0; i < h; i++)
+	{
+		for(int j = 0; j<i+1; j++)
+		{
+			std::cout << "#";
+		}
+		std::cout << "\n";
+	}
+}
+void countdown(int n) {
+	if (n <= 0) {
+		std::cout << "Blastoff!" << std::endl;
+	}
+	else {
+		std::cout << n << " ";
+		countdown(n - 1); // This is like opening a smaller box inside
+	}
+}
+
+int main() 
+{
+	draw(5); // Start with the big box
+	return 0;
+}
+*/
+
+//Polymorphism - Lecture
+/*
+class MyBaseClass 
+{ 
+public:    
+
+	//Functions can be pure virtual by specifying the = 0;
+	//Pure virtual functions do not have definitions and are also called interfaces. 
+	//Pure virtual functions must be redefined in the derived class.
+	virtual void pureVirtual() = 0;
+	//Classes having at least one pure virtual function are called abstract classes and cannot be instantiated.
+	//you cannot create objects of that class directly. 
+
+	virtual void dowork() 
+	{ 
+		std::cout << "Hello from a base class." << '\n'; 
+	} 
+
+	//base class must have a virtual destructor if it is to be used in a polymorphic scenario.
+	virtual ~MyBaseClass() {};
+}; 
+
+class MyDerivedClass : public MyBaseClass 
+{ 
+public:    
+
+	//If there were no dowork() function in the derived class, 
+	// it would invoke the base class version
+	void dowork() 
+	{ 
+		std::cout << "Hello from a derived class." << '\n'; 
+	} 
+
+	virtual void pureVirtual() 
+	{
+		std::cout << "Pure virtual redifinition." << '\n';
+	}
+}; 
+
+int main() 
+{ 
+	MyBaseClass* o = new MyDerivedClass;    
+
+	//(*o).dowork();
+
+	//The -> (arrow) operator does two things: 
+	// it dereferences a pointer to an object and accesses the member of a class.
+	o->dowork();    
+	o->pureVirtual();
+
+	delete o; 
+}
+*/
+
+//Chapter 26 - Exercises
+/*
+class Person 
+{
+private:
+	std::string name;
+public:
+	// the 'explicit' keyword is used in front of a constructor to indicate 
+	// that the constructor should not be implicitly invoked for implicit type conversions.
+	explicit Person(const std::string& name)
+		:name{name}
+	{}
+
+	// Implicit operations are those that are performed automatically 
+	// by the compiler without the need for explicit instructions from the programmer.
+
+	std::string getname() const
+	{
+		return this->name;
+	}
+
+};
+
+class Student : public Person
+{
+private:
+	int semester;
+
+public:
+	Student(const std::string& aname, int asemester) 
+		: Person::Person{ aname }, semester{ asemester }    
+	{
+		//Person::setName(aname);
+		//semester = asemester;
+	}
+
+	int getsemester() const
+	{
+		return this->semester;
+	}
+
+};
+
+int main()
+{
+	Person person{ "John Doe" };
+	std::cout << person.getname() << '\n';
+	Student stud{ "Lourd",2 };
+	std::cout << stud.getname() << '\n';    
+	std::cout << "The semester is: " << stud.getsemester() << '\n';
+}
+*/
+
+//static Specifier - Lecture
+/*
+// * 'static storage duration' - memory space for static objects is allocated 
+//    when the program starts and deallocated when the program ends.
+// *  One instance of a static object exists in the program.
+// *  a local variable is marked as static, the space for it is allocated the 
+//    first time the program control encounters its definition and deallocated when the program exits.
+
+void myfunction()
+{
+	//without 'static' x will always return to 1 after code block
+
+	static int x = 0; // defined only the first time, skipped every other time
+	x++;
+	std::cout << "Function ran: " << x << " time(s)." << '\n';
+}
+
+class MyClass
+{
+public:
+
+	static int x; //declare a static data member
+
+	static int add(int &num1, int &num2)
+	{
+		return num1 + num2;
+	}
+
+	static void printStatic();
+
+};
+int MyClass::x = 123; //define a static data member
+
+void MyClass::printStatic()
+{
+	std::cout << "Hello World from a static member function." << '\n';
+}
+
+int main()
+{
+	myfunction(); // x == 1    
+	myfunction(); // x == 2    
+	myfunction(); // x == 3
+
+	MyClass::x = 456; //access a static data member
+	std::cout << "Static data member: " << MyClass::x << '\n';
+
+	int j = 3, k = 5;
+
+	std::cout << "Static Function: " << MyClass::add(j, k) << '\n';
+	MyClass::printStatic();
+
+}
+
+// static class
+// it belongs to the class rather than an instance of the class.
+*/
+
+//Templates - Lecture
+/*
+//Function Template
+template <typename T>
+
+//By adding const to the reference(const T&), 
+//you're telling the compiler that the function 
+//won't modify the values passed to it.This allows the 
+//compiler to bind references to temporary values, like literals.
+
+//if non-reference its okay to have rvalue parameters without const
+
+T add(const T &first, const T &second)
+{
+	return first + second;
+}
+
+int main()
+{
+	int x = 3;
+	int y = 5;
+
+	// Line 1423  does not work if you are passing lvalues  to the function.
+	// With that said you can bypass this by adding 'const' to the parameters.
+	auto x = add(3, 5);
+
+	// alternative explicit specify, NOTE: can be omitted
+	add<int>(123,456);
+
+	std::cout << x << "\n";
+}
+
+//Class Template
+template <typename T>
+class MyClass
+{
+private:
+	T x;
+public:
+	T getvalue()
+	{
+		return x;
+	}
+};
+
+//Template Specialization
+//If we want our template to behave differently, only for a specific type
+
+//template <>
+//the template specialization code follows
+*/
+
+//Enumerations - Lecture
+/*
+//Unscoped Enum
+//These unscoped enums have their enumerators leak into 
+//an outside scope, the scope in which the enum type itself is defined.
+
+//It will auto increment if the user defined a value. In this case 10 so the next is 11
+enum MyEnum 
+{ 
+	myfirstvalue = 10, 
+	mysecondvalue, 
+	mythirdvalue 
+};
+
+enum class Colors { Red, Green, Blue };
+
+int main() 
+{
+	//Unscope Enum
+	MyEnum myenum = myfirstvalue;    
+	myenum = mysecondvalue; // we can change the value of our enum object
+
+	//Scoped Enum
+	//To access an enumerator value, we prepend the 
+	// enumerator with the enum name and a scope resolution operator :: such as
+	MyEnum2 myenum2 = MyEnum2::myfirst;
+
+	std::cout << myenum << "\n";
+	std::cout << myenum2 << "\n";
+
+	Colors mycolors = Colors::Green;
+	switch (mycolors)
+	{
+	case Colors::Red:
+		std::cout << "The color is Red." << '\n';
+		break;
+	case Colors::Green:
+		std::cout << "The color is Green." << '\n';
+		break;
+	case Colors::Blue:
+		std::cout << "The color is Blue." << '\n';
+		break;
+	default:
+		break; }
+
+}
+
+//Scoped Enum
+//Prefer scoped enums to unscoped enums, as scoped 
+//enums do not leak their enumerators into an outer 
+//scope and are not implicitly convertible to other types.
+
+//To declare a variable of type enum class (scoped enum), we write
+enum class MyEnum2 
+{ 
+	myfirst, 
+	mysecond, 
+	mythird 
+}; 
+*/
+
+//Chapter 30 - Exercises
+/*
+enum class Colors { Red, Green, Blue };
+
+enum class Days
+{
+	Monday,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday
+};
+
+template <typename T>
+class ClassTemplate
+{
+public:
+	T x;
+
+	ClassTemplate(T xx)
+		:x{xx}
+	{
+		std::cout << "Class Template Constructor Initiated" << "\n";
+	}
+
+	T getX()
+	{
+		return x;
+	}
+
+	void setX(T xx)
+	{
+		this->x = xx;
+	}
+
+};
+
+template <typename T>
+T addSum(T num1, T num2)
+{
+	return num1 + num2;
+}
+
+void myfunction()
+{
+	static int x;
+	x++;
+	std::cout << "Time(s) Called: " << x << "\n";
+}
+
+class MyClass
+{
+public:
+	static std::string x;
+
+	static void printStatic();
+	void printNonStatic();
+
+};
+
+std::string MyClass::x = "Hi";
+
+void MyClass::printStatic() 
+{
+	std::cout << "Invoked Static Variable" << "\n";
+}
+
+void MyClass::printNonStatic()
+{
+	std::cout << "Invoked Non-Static Variable" << "\n";
+}
+
+int main()
+{
+	myfunction();
+	myfunction();
+	myfunction();
+
+	std::cout << MyClass::x << "\n";
+
+	MyClass::x = "Hello";
+
+	std::cout << MyClass::x << "\n";
+
+	MyClass o;
+
+	MyClass::printStatic();
+	o.printNonStatic();
+
+	std::cout << addSum<int>(3, 5) << "\n";
+
+	std::cout << "\n";
+
+	//when you define a template class, you need to specify 
+	//the template parameter when creating an object of that class.
+	// cannot omit <int> in this context
+	ClassTemplate<int> obj1{42};
+
+	std::cout << obj1.getX() << "\n";
+	obj1.setX(32);
+	std::cout << obj1.getX() << "\n";
+
+	std::cout << "\n";
+
+	Days myday;
+	myday = Days::Monday;
+
+	if (myday == Days::Monday)
+	{
+		myday = Days::Friday;
+	}
+
+	if (myday == Days::Friday)
+	{
+		std::cout << "Friday" << "\n";
+	}
+
+	std::cout << "\n";
+
+	Colors mycolors; 
+	mycolors = Colors::Green;
+	switch (mycolors) 
+	{ 
+	case Colors::Red:        
+		std::cout << "The color is Red." << '\n';        
+		break;    
+	case Colors::Green:        
+		std::cout << "The color is Green." << '\n';        
+		break;    
+	case Colors::Blue:        
+		std::cout << "The color is Blue." << '\n';        
+		break;    
+	default:        
+		break; 
+	}
+
+}
+*/
+
+//Organizing Code - Lecture
+/*
+//Header and Source Files
+// * Header files usually have the .h (or .hpp) extension.
+// * Source files are files where we can store our definitions 
+//   and the main program. They usually have the .cpp (or .cc) extension.
+// * To include a standard library header, we use the #include statement 
+//   followed by a header name without an extension, enclosed in angled 
+//   brackets such as <headername>. Example: #include <iostream>
+// * To include user-defined header files, we use the #include statement, 
+//   followed by a full header name with an extension enclosed in double quotes.
+//   Example:#include "myheader.h"
+//Header Guards
+// * Header guards to ensure that our header is included only once in the compilation process.
+//   #ifndef MY_HEADER_H
+//   #define MY_HEADER_H
+//   //header file source code
+//   //goes here
+//   #endif
+//Namespaces
+namespace MyNameSpace 
+{ 
+	int x;    
+	double d; 
+}
+namespace MyNameSpace 
+{ 
+	char c;    
+	bool b; 
+}
+// * If we have several separate namespaces with the same name in our code, 
+//   we are extending that namespace, we are not redefining it.
+int main() 
+{ 
+	MyNameSpace::x = 123;    
+	MyNameSpace::d = 456.789; 
+	MyNameSpace::c = 'a';
+	MyNameSpace::b = true;
+}
+// * To introduce an entire namespace into the current scope, we can use the using directive
+namespace MyNameSpace
+{ 
+	int x;    
+	double d; 
+}
+using namespace MyNameSpace; 
+
+int main() 
+{ 
+	x = 123;    
+	d = 456.789; 
+}
+*/
+
+//Sample Problems
+//Factorial - ChatGpt Score = 6/10
+/*
+int main()
+{
+	int x;
+	std::cin >> x;
+	int y = x;
+
+	std::cout << x << "! = ";
+
+	int product = 0;
+	int totalProduct = 0;
+	int totalProductSum = 0;
+
+	for (int i = 0; i < y; i++)
+	{
+		std::cout << x;
+
+		if (totalProduct == 0) {
+			product = x;
+			--x;
+			totalProduct = product * x;
+			totalProductSum = totalProduct;
+		}
+		else 
+		{
+			--x;
+			if (x != 0) {
+				totalProductSum *= x;
+			}
+			
+		}
+
+		if (x != 0) {
+			std::cout << " x ";
+		}
+	}
+
+	std::cout << " = " << totalProductSum;
+}
+*/
+//Factorial - ChatGpt Answer key
+/*
+int main() {
+	int number;
+	std::cout << "Enter a non-negative integer: ";
+	std::cin >> number;
+
+	if (number < 0) {
+		std::cout << "Factorial is not defined for negative numbers.\n";
+		return 1;  // Indicate error
+	}
+
+	int factorial = 1;
+
+	std::cout << number << "! = ";
+
+	for (int i = 1; i <= number; ++i) {
+		factorial *= i;
+		std::cout << i;
+		if (i < number) {
+			std::cout << " x ";
+		}
+	}
+
+	std::cout << " = " << factorial << "\n";
+
+	return 0;  // Success
+}
+*/
+//Palindrome Check - ChatGpt Score = 7/10
+/*
+std::string convert(std::string &s)
+{
+	for (int i = 0; i < s.length(); i++)
+	{
+		s[i] = toupper(s[i]);
+	}
+	return s;
+}
+
+int main()
+{
+	std::string word; 
+	std::cout << "Enter a word: ";
+	std::cin >> word;
+
+	std::string wordReversed = word;
+
+	reverse(wordReversed.begin(), wordReversed.end());
+
+	//To match both cases
+	convert(word);
+	convert(wordReversed);
+
+	int result = word.compare(wordReversed);
+
+	if (result == 0)
+	{
+		std::cout << "The word is a Palindrome" << "\n";
+	}
+	else
+	{
+		std::cout << "The word is NOT a Palindrome" << "\n";;
+	}
+}
+//GPT criticism
+//Input Handling : Use std::getline instead of std::cin >> word to handle cases where the entered word contains spaces.
+
+//Function Return Type : The convert function modifies the input string in - place, so its return type could be void.
+
+//Function Parameters : Pass the input string to the convert function by value or as a constant reference(const std::string & s) 
+// to make it clear that the function doesn't modify the original string.
+
+//Naming Convention : Function names usually follow camelCase or snake_case.Consider naming convert as convertToUppercase or something similar.
+
+//Include Necessary Headers : Make sure to include the necessary headers for functions like reverse and toupper.
+
+//Consistency in Output : In the output, you have an extra semicolon after "\n" in the else branch.Make sure the outputs are consistent.
+*/
+//Palindrome Check - ChatGpt Answer key
+/*
+#include <iostream>
+#include <algorithm>
+
+bool isPalindrome(const std::string& s) {
+	std::string reversed = s;
+	std::reverse(reversed.begin(), reversed.end());
+
+	// Case-insensitive comparison
+	return std::equal(s.begin(), s.end(), reversed.begin(), reversed.end(), [](char a, char b) {
+		return tolower(a) == tolower(b);
+		});
+}
+
+int main() {
+	std::string word;
+
+	std::cout << "Enter a word: ";
+	std::getline(std::cin, word);
+
+	if (isPalindrome(word)) {
+		std::cout << "The word is a Palindrome\n";
+	}
+	else {
+		std::cout << "The word is NOT a Palindrome\n";
+	}
+
+	return 0;
+}
+*/
+
+//Chapter 39 - Exercises
+
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <map>
+#include <numbers>
+
+int main()
+{
+	
+	std::vector <int> numbers = {1,2,3,4,5,6,7};
+
+	numbers.push_back(10);
+	numbers.push_back(12);
+
+	// erase a single value
+	//numbers.erase(numbers.begin() + 1);
+
+	// deleting range of elements
+	//numbers.erase(numbers.begin(), numbers.begin()+5);
+
+	int findNum = 4;
+	auto foundNum = std::find(std::begin(numbers), std::end(numbers), findNum);
+
+	if (foundNum != std::end(numbers))
+	{
+		std::cout << "Element found. Deleting the element\n";
+		numbers.erase(foundNum);
+		std::cout << "Element Deleted\n";
+	}
+	else
+	{
+		std::cout << "Element not found\n";
+	}
+
+	for (int num : numbers)
+	{
+		std::cout << num << "\n";
+	}
+
+	//internally, std::set is a sorted container that holds unique values.
+	
+	std::set<int> sortNum = { 7,3,9,1,6,2,8,5 };
+
+	sortNum.insert(10);
+	sortNum.insert(11);
+	sortNum.erase(11);
+
+	auto find = sortNum.find(10);
+
+	if (find != sortNum.end())
+	{
+		std::cout << "Found and Deleting" << "\n";
+		sortNum.erase(find);
+	}
+	else
+	{
+		std::cout << "Not Found" << "\n";
+	}
+
+	for (int sortedNum : sortNum)
+	{
+		std::cout << sortedNum << "\n";
+	}
+
+	
+	std::map <char, int> exerciseMap = { {'a',1},{'b',2},{'c',3} };
+
+	exerciseMap.insert({ 'd',4 });
+
+	exerciseMap['e'] = 5;
+
+	int findkey = 'c';
+
+	auto foundkey = exerciseMap.find(findkey);
+
+	if (foundkey != exerciseMap.end())
+	{
+		std::cout << "Found and Deleting\n";
+		exerciseMap.erase(foundkey);
+	}
+	else
+	{
+		std::cout << "not found\n";
+	}
+
+	for (auto& content : exerciseMap)
+	{
+		std::cout << content.first << " " << content.second << "\n";
+	}
+
+	std::vector <int> lambda = { 1,2,3,4,5 };
+
+	std::sort(std::begin(lambda), std::end(lambda), [](int x, int y) {return x > y; });
+
+
+	for (const auto& el : lambda)
+	{
+		std::cout << el << "\n";
+	}
+}
+*/
+
